@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import './App.css'
-function Grid({filled, onClick}){
+function Grid({filled, onClick, isDisabled}){
   return <button type="button"
    onClick={onClick} 
-  className={filled? "cell cell-active ": "cell"} />
+  className={filled? "cell cell-active ": "cell"} 
+  disabled= {isDisabled}
+  />
 }
 
 function App() {
@@ -51,6 +53,7 @@ const timer= setInterval(()=>{
        return  value ? <Grid key={index}
         filled={order.includes(index)}
         onClick={()=>{activeCells(index)}}
+        isDisabled={order.includes(index) || isDeactivating} 
         /> : <span> </span>;
       })}
       </div>
