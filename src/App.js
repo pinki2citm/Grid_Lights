@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import './App.css'
-function Grid({filled, onClick, isDisabled}){
+function Grid({filled, onClick, isDisabled, label}){
   return <button type="button"
    onClick={onClick} 
+   aria-label={label}
   className={filled? "cell cell-active ": "cell"} 
   disabled= {isDisabled}
   />
@@ -52,6 +53,7 @@ const timer= setInterval(()=>{
       {config.flat(1).map((value,index)=>{
        return  value ? <Grid key={index}
         filled={order.includes(index)}
+        label ={`cell ${index}`}
         onClick={()=>{activeCells(index)}}
         isDisabled={order.includes(index) || isDeactivating} 
         /> : <span> </span>;
