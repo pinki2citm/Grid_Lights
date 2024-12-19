@@ -8,13 +8,30 @@ function Grid({filled, onClick}){
 
 function App() {
   const [order,SetOrder]=useState([])
+  const [isDeactivating, SetIsDeactivating]=useState(false);
   const config =[
     [1,1,1],
     [1,0,1],
     [1,1,1]
   ];
 
-const DeActiveCells= ()=>{};
+const DeActiveCells= ()=>{
+ SetIsDeactivating(true);
+const timer= setInterval(()=>{
+  SetOrder((orgOrder)=>{
+    const newOrder = orgOrder.slice();
+    newOrder.pop();
+
+    if(newOrder.length===0)
+    {
+      SetIsDeactivating(false);
+      clearInterval(timer);
+    }
+    return newOrder;
+  })
+},300)
+
+};
   const activeCells= (index)=>{
     const newOrder =[...order, index];
     SetOrder(newOrder);
